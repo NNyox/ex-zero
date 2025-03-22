@@ -182,7 +182,6 @@
     });
 
     function verifyWin() {
-      console.clear();
       let winObj = turnoX ? "#equis" : "#cero";
       function Winner() {
         table.setAttribute("class", "tableAnimation");
@@ -192,14 +191,6 @@
         winDetected = true;
       };
       function detectCells(x, y, z) {
-        console.log(
-          x,
-          getComputedStyle(document.getElementById(x).querySelector(winObj)).opacity,
-          y,
-          getComputedStyle(document.getElementById(y).querySelector(winObj)).opacity,
-          z,
-          getComputedStyle(document.getElementById(z).querySelector(winObj)).opacity
-        );
           if (
             getComputedStyle(document.getElementById(x).querySelector(winObj)).opacity === "1" &&
               getComputedStyle(document.getElementById(y).querySelector(winObj)).opacity === "1" &&
