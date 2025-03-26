@@ -9,68 +9,119 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
   <title>Equis-Cero</title>
   <style>
+    :root {
+      --border: solid black 2px;
+    }
     *{
       user-select: none;
       font-family: 'Franklin Gothic';
       /* transition: all ease-out 0.5s; */
     }
-    #table {
+    .center {
       position: absolute;
       transform: translate(-50%, -50%);
       left: 50%;
       top: 50%;
-      width: 75vw;
-      max-width: 350px;
+    }
+    #table {
+      width: 75vw; max-width: 350px;
       aspect-ratio: 1 / 1;
-      display: grid;
-      grid-template-rows: repeat(3, 1fr);
-      grid-template-columns: repeat(3, 1fr);
+      display: grid; grid-template-rows: repeat(3, 1fr);grid-template-columns: repeat(3, 1fr);
+      place-items: center;
     }
     .tableAnimation {
-      animation: 0.7s tableDisapear;
-      animation-fill-mode: forwards;
       pointer-events: none;
+      animation: getBigger 0.7s linear forwards;
     }
-    @keyframes tableDisapear {
+    .barZone {
+      z-index: -1;
+      width: 75vw; max-width: 350px;
+      aspect-ratio: 1 / 1;
+    }
+    .barZoneAnimation {
+      animation: getBigger 0.7s linear forwards;
+    }
+    @keyframes getBigger {
       from {}
       to {
         opacity: 0.3;
-        width: 80vw;
+        transform: translate(-50%, -50%) scale(1.1);
       }
+    }
+    .bar {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      left: 50%;
+      top: 50%;
+      background-color: black;
+      border-radius: 5px;
+      height: 5px;
+      transform-origin: center;
+    }
+    .barAnimation {
+      animation: extend 1s forwards;
+    }
+    @keyframes extend {
+      from {width: 0;}
+      to {width: 100%;}
     }
     .face {
       height: 100%;
       width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
-      #face1, #face3, #face4, #face6 {
-        border-bottom: 2px solid black;
+    /* .faceAnimation {
+      animation: 0.5s forwards pulse;
+    } */
+    /* @keyframes pulse {
+      0% {background-color: transparent;}
+      50% {background-color: red;}
+      100% {background-color: transparent;}
+    } */
+      #face4, #face6 {
+        border-bottom: var(--border);
+        border-top: var(--border);
       }
-      #face2, #face5 {
-        border-bottom: 2px solid black;
-        border-left: 2px solid black;
-        border-right: 2px solid black;
+      #face2, #face8 {
+        border-left: var(--border);
+        border-right: var(--border);
       }
-      #face8 {
-        border-left: 2px solid black;
-        border-right: 2px solid black;
+      #face5 {
+        border-left: var(--border);
+        border-bottom: var(--border);
+        border-right: var(--border);
+        border-top: var(--border);
       }
       .figure {
-        font-family: 'Fredoka', sans-serif;
         position: absolute;
+        width: calc(100% / 3); height: calc(100% / 3);
         opacity: 0;
-        font-size: clamp(10px, 75px, 15vw);
       }
-        #equis {
-          color: red;
+        .part {
+          position: absolute;
+          width: calc(100% / 3);
+          --lr: translate(-50%, -50%);
+          top: 50%;
+          left: 50%;
         }
-        #cero {
-          color: blue;
+        #equis > .lat {
+          border: solid red 2px;
+          border-radius: 2px;
+        }
+          #equis > .li {
+            transform: var(--lr) rotate(-45deg);
+          }
+          #equis > .ld {
+            transform: var(--lr) rotate(45deg);
+          }
+        #cero > .ci {
+          width: 25%;
+          border: solid blue 3px;
+          border-radius: 100%;
+          aspect-ratio: 1 / 1;
+          transform: var(--lr);
         }
     #button {
-      font-size: clamp(10px, 40px, 10vw);
+      font-size: clamp(10px, 30px, 10vw);
       position: absolute;
       transform: translate(-50%, -50%);
       left: 50%;
@@ -79,7 +130,8 @@
       background: none;
     }
     #text {
-      font-size: clamp(10px, 50px, 10vw);
+      /* transition: all ease-in-out 0.5s; */
+      font-size: clamp(10px, 40px, 10vw);
       position: absolute;
       transform: translate(-50%, -50%);
       left: 50%;
@@ -99,48 +151,95 @@
 </head>
 
 <body>
-  <div id="table">
+  <div id="table" class="center">
     <div class="face" id="face1">
-      <span class="figure" id="equis">x</span>
-      <span class="figure" id="cero">o</span>
+      <div class="figure" id="equis">
+        <div class="part lat li"></div>
+        <div class="part lat ld"></div>
+      </div>
+      <div class="figure" id="cero">
+        <div class="part ci"></div>
+      </div>
     </div>
     <div class="face" id="face2">
-      <span class="figure" id="equis">x</span>
-      <span class="figure" id="cero">o</span>
+      <div class="figure" id="equis">
+        <div class="part lat li"></div>
+        <div class="part lat ld"></div>
+      </div>
+      <div class="figure" id="cero">
+        <div class="part ci"></div>
+      </div>
     </div>
     <div class="face" id="face3">
-      <span class="figure" id="equis">x</span>
-      <span class="figure" id="cero">o</span>
+      <div class="figure" id="equis">
+        <div class="part lat li"></div>
+        <div class="part lat ld"></div>
+      </div>
+      <div class="figure" id="cero">
+        <div class="part ci"></div>
+      </div>
     </div>
     <div class="face" id="face4">
-      <span class="figure" id="equis">x</span>
-      <span class="figure" id="cero">o</span>
+      <div class="figure" id="equis">
+        <div class="part lat li"></div>
+        <div class="part lat ld"></div>
+      </div>
+      <div class="figure" id="cero">
+        <div class="part ci"></div>
+      </div>
     </div>
     <div class="face" id="face5">
-      <span class="figure" id="equis">x</span>
-      <span class="figure" id="cero">o</span>
+      <div class="figure" id="equis">
+        <div class="part lat li"></div>
+        <div class="part lat ld"></div>
+      </div>
+      <div class="figure" id="cero">
+        <div class="part ci"></div>
+      </div>
     </div>
     <div class="face" id="face6">
-      <span class="figure" id="equis">x</span>
-      <span class="figure" id="cero">o</span>
+      <div class="figure" id="equis">
+        <div class="part lat li"></div>
+        <div class="part lat ld"></div>
+      </div>
+      <div class="figure" id="cero">
+        <div class="part ci"></div>
+      </div>
     </div>
     <div class="face" id="face7">
-      <span class="figure" id="equis">x</span>
-      <span class="figure" id="cero">o</span>
+      <div class="figure" id="equis">
+        <div class="part lat li"></div>
+        <div class="part lat ld"></div>
+      </div>
+      <div class="figure" id="cero">
+        <div class="part ci"></div>
+      </div>
     </div>
     <div class="face" id="face8">
-      <span class="figure" id="equis">x</span>
-      <span class="figure" id="cero">o</span>
+      <div class="figure" id="equis">
+        <div class="part lat li"></div>
+        <div class="part lat ld"></div>
+      </div>
+      <div class="figure" id="cero">
+        <div class="part ci"></div>
+      </div>
     </div>
     <div class="face" id="face9">
-      <span class="figure" id="equis">x</span>
-      <span class="figure" id="cero">o</span>
+      <div class="figure" id="equis">
+        <div class="part lat li"></div>
+        <div class="part lat ld"></div>
+      </div>
+      <div class="figure" id="cero">
+        <div class="part ci"></div>
+      </div>
     </div>
   </div>
-  <a href="index.html">
+  <div class="barZone center">
+    <div class="bar"></div>
+  </div>
+  <a href="">
     <button id="button">reiniciar</button>
   </a>
-  <a id="link" href=""></a>
   <span id="text" style="color: red;">turno de X</span>
 
   <script>
@@ -157,6 +256,7 @@
         ) : (
           element.querySelector("#cero").style.opacity = "1"
         );
+        // element.classList.add("faceAnimation");
         verifyWin();
         if (!winDetected) {
           turnoX ? (
@@ -167,15 +267,15 @@
             text.style.color = "red"
           );
         };
-        turnoX = !turnoX;
         if (draw < 9) {
           draw++;
-        } else {
-          table.setAttribute("class", "tableAnimation");
-          text.setAttribute("class", "textAnimation");
+        } else if (draw && !winDetected) {
+          table.classList.add("tableAnimation");
+          text.classList.add("textAnimation");
           text.textContent = "Empate";
           text.style.color = "black";
         };
+        turnoX = !turnoX;
         element.removeEventListener("click", write);
       };
       element.addEventListener("click", write)
@@ -184,25 +284,53 @@
     function verifyWin() {
       let winObj = turnoX ? "#equis" : "#cero";
       function Winner() {
-        table.setAttribute("class", "tableAnimation");
-        text.setAttribute("class", "textAnimation");
+        table.classList.add("tableAnimation");
+        text.classList.add("textAnimation");
         text.textContent = `gana ${turnoX ? "X" : "O"}`;
         text.style.color = turnoX ? "red" : "blue";
         winDetected = true;
       };
-      function detectCells(x, y, z) {
+
+      let bar = document.querySelector(".bar");
+      let barZone = document.querySelector(".barZone");
+      function setBar(orientation, position) {
+        let m1 = (100 / 6);
+        let m3 = (100 / 6) * 5;
+        let r = "translate(-50%, -50%) rotate(";
+        bar.style.transform = orientation == "dl" ? r+="45deg)" : orientation == "dr" ? r+="-45deg)" : orientation == "v" ? r+="90deg)" : r+="0deg)";
+        bar.style.backgroundColor = turnoX ? "red" : "blue";
+        if (orientation == "h") {
+          if (position == 1) {bar.style.top = m1+"%"};
+          if (position == 3) {bar.style.top = m3+"%"};
+        } else if (orientation == "v") {
+          if (position == 1) {bar.style.left = m1+"%"};
+          if (position == 3) {bar.style.left = m3+"%"};
+        };
+        barZone.classList.add("barZoneAnimation")
+        bar.classList.add("barAnimation");
+      };
+
+      function detectCells(x, y, z, numberCombination) {
           if (
             getComputedStyle(document.getElementById(x).querySelector(winObj)).opacity === "1" &&
-              getComputedStyle(document.getElementById(y).querySelector(winObj)).opacity === "1" &&
-              getComputedStyle(document.getElementById(z).querySelector(winObj)).opacity === "1"
-            ) {
+            getComputedStyle(document.getElementById(y).querySelector(winObj)).opacity === "1" &&
+            getComputedStyle(document.getElementById(z).querySelector(winObj)).opacity === "1"
+          ) {
+            if (numberCombination == 0) {setBar("h", 1)}
+            if (numberCombination == 1) {setBar("dl")}
+            if (numberCombination == 2) {setBar("v", 1)}
+            if (numberCombination == 3) {setBar("v")}
+            if (numberCombination == 4) {setBar("dr")}
+            if (numberCombination == 5) {setBar("v", 3)}
+            if (numberCombination == 6) {setBar("h")}
+            if (numberCombination == 7) {setBar("h", 3)}
             Winner();
           };
         };
       const winningCombinations = [[1, 2, 3],[1, 5, 9],[1, 4, 7],[2, 5, 8],[3, 5, 7],[3, 6, 9],[4, 5, 6],[7, 8, 9]];
       for (let i in winningCombinations) {
         let combination = winningCombinations[i];
-        detectCells(`face${combination[0]}`, `face${combination[1]}`, `face${combination[2]}`);
+        detectCells(`face${combination[0]}`, `face${combination[1]}`, `face${combination[2]}`, i);
       };
     };
   </script>
