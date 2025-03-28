@@ -409,7 +409,10 @@
 
     function verifyWin() {
       let winObj = turnoX ? "#equis" : "#cero";
+
       function Winner() {
+        let music =new Audio("win_effect.mp3");
+        music.play();
         table.classList.add("tableAnimation");
         text.classList.add("textAnimation");
         text.textContent = `gana ${turnoX ? "X" : "O"}`;
