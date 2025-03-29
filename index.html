@@ -30,11 +30,18 @@
       width: 99vw;
     }
       .particles-animation {
-        animation: particles 0.7s linear forwards;
+        opacity: 0;
+        height: 0;
+        animation: particles 1s linear forwards;
       }
       @keyframes particles {
-        from{height: 0; opacity: 0;}
-        to{height: 99vh; opacity: 1;}
+        from {
+          height: 0;
+          opacity: 0;
+        } to {
+          height: 99vh;
+          opacity: 1;
+        }
       }
     .center {
       position: absolute;
@@ -269,13 +276,13 @@
           "value": "#ff0000"
         },
         "shape": {
-          "type": "star",
+          "type": "polygon",
           "stroke": {
             "width": 0,
             "color": "#000000"
           },
           "polygon": {
-            "nb_sides": 5
+            "nb_sides": 4
           },
           "image": {
             "src": "img/github.svg",
@@ -312,7 +319,7 @@
         },
         "move": {
           "enable": true,
-          "speed": 5,
+          "speed": 7,
           "direction": "bottom",
           "random": false,
           "straight": false,
@@ -411,8 +418,7 @@
       let winObj = turnoX ? "#equis" : "#cero";
 
       function Winner() {
-        let music =new Audio("win_effect.mp3");
-        music.play();
+        let music =new Audio("game-bonus.mp3").play();
         table.classList.add("tableAnimation");
         text.classList.add("textAnimation");
         text.textContent = `gana ${turnoX ? "X" : "O"}`;
